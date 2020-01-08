@@ -1,15 +1,35 @@
-.box {
+.bar {
   display: flex;
   height: 40px;
-  margin: 10px;
-  border-style: dotted;
+  padding: 10px;
 }
 
-.box :first-child {
-  background-color: blue;
+.bar :first-child {
   transition: all 0.5s;
+  line-height: 40px;
+  vertical-align: middle;
+  color: white;
+  font-size: 25px;
+  font-family: 'Verdana', Times, serif;
 }
 
-.box > * {
+.bar > * {
   flex: 0 auto;
+}
+
+.bar-value {
+  float: right;
+  padding-right: 15px;
+}
+
+.bar-title {
+  float: left;
+  padding-left: 15px;
+}
+
+.image-icon {
+  height: 32px;
+  width: 40px;
+  padding-right: 8px;
+  vertical-align: middle;
 }

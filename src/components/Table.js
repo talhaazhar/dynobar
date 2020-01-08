@@ -1,24 +1,40 @@
 import React, { Component } from 'react';
 import FlipMove from 'react-flip-move';
 import TableRow from './TableRow';
+import PropTypes from 'prop-types';
 
 import './style/Table.css';
+
+const colorList = [
+  '#e6194B',
+  '#3cb44b',
+  '#ffe119',
+  '#4363d8',
+  '#f58231',
+  '#911eb4',
+  '#42d4f4',
+  '#f032e6',
+  '#bfef45',
+  '#fabebe',
+];
 
 function getFlexPercentage(currValue, topValue) {
   return topValue ? (currValue * 1.0) / topValue : 0;
 }
 
 export default class Table extends Component {
+  static propTypes = {
+    data: PropTypes.array,
+  };
+
   constructor(props) {
     super(props);
+    this.props.data.forEach(function(entry, idx) {
+      entry.color = colorList[idx % colorList.length];
+    });
+
     this.state = {
-      entries: [
-        { title: 'Ferrari', key: 1, value: 3322, width: 1 },
-        { title: 'Honda', key: 2, value: 3212, width: 1 },
-        { title: 'BMW', key: 3, value: 2321, width: 1 },
-        { title: 'Mercedes', key: 4, value: 2111, width: 1 },
-        { title: 'Toyota', key: 5, value: 1532, width: 1 },
-      ],
+      entries: this.props.data,
     };
   }
 
@@ -31,14 +47,14 @@ export default class Table extends Component {
   }
 
   startModal() {
-    this.intervalHandle = setInterval(() => this.updateData(), 500);
+    this.intervalHandle = setInterval(() => this.updateData(), 50);
   }
 
   updateData() {
     const { entries } = this.state;
     const entriesCopy = JSON.parse(JSON.stringify(entries));
     const idx = Math.floor(Math.random() * entries.length);
-    const add = Math.floor(Math.random() * 500);
+    const add = Math.floor(Math.random() * 50);
     entriesCopy[idx].value += add;
     entriesCopy.sort((a, b) => (a.value < b.value ? 1 : -1));
 
@@ -52,15 +68,25 @@ export default class Table extends Component {
   }
 
   render() {
+    let { entries } = this.state;
+    const numBars = Math.min(entries.length, 6);
+    entries = entries.slice(0, numBars);
+
     return (
       <div className="bar-table">
-        <FlipMove duration={1000} style={{ width: '100%' }}>
-          {this.state.entries.map(entry => (
+        <FlipMove
+          duration={800}
+          enterAnimation="fade"
+          leaveAnimation="fade"
+          style={{ width: '100%' }}>
+          {entries.map(entry => (
             <TableRow
               title={entry.title}
               key={entry.key}
               value={entry.value}
               percentage={entry.width}
+              color={entry.color}
+              logo={entry.logo}
             />
           ))}
         </FlipMove>

@@ -8,6 +8,8 @@ export default class TableRow extends Component {
     title: PropTypes.string,
     value: PropTypes.number,
     percentage: PropTypes.number,
+    color: PropTypes.string,
+    logo: PropTypes.string,
   };
 
   constructor(props) {
@@ -19,15 +21,18 @@ export default class TableRow extends Component {
   }
 
   render() {
-    const { percentage, title, value } = this.props;
+    const { percentage, title, value, color, logo } = this.props;
 
     return (
       <div>
-        {`${title}:  ${value}`}
-
-        <div className="box">
-          <div style={{ flex: percentage }}></div>
-          <div></div>
+        <div className="bar">
+          <div style={{ flex: percentage, backgroundColor: color }}>
+            <div className="bar-title">
+              <img src={logo} alt="Avatar" className="image-icon" />
+              {title}
+            </div>
+            <div className="bar-value">{value}</div>
+          </div>
         </div>
       </div>
     );
