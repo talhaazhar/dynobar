@@ -1,0 +1,15 @@
+.box {
+  display: flex;
+  height: 40px;
+  margin: 10px;
+  border-style: dotted;
+}
+
+.box :first-child {
+  background-color: blue;
+  transition: all 0.5s;
+}
+
+.box > * {
+  flex: 0 auto;
+}

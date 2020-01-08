@@ -4,16 +4,20 @@ import TableRow from './TableRow';
 
 import './style/Table.css';
 
+function getFlexPercentage(currValue, topValue) {
+  return topValue ? (currValue * 1.0) / topValue : 0;
+}
+
 export default class Table extends Component {
   constructor(props) {
     super(props);
     this.state = {
       entries: [
-        { title: 'Ferrari', key: 1, index: 1 },
-        { title: 'Honda', key: 2, index: 2 },
-        { title: 'BMW', key: 3, index: 3 },
-        { title: 'Mercedes', key: 4, index: 4 },
-        { title: 'Toyota', key: 5, index: 5 },
+        { title: 'Ferrari', key: 1, value: 3322, width: 1 },
+        { title: 'Honda', key: 2, value: 3212, width: 1 },
+        { title: 'BMW', key: 3, value: 2321, width: 1 },
+        { title: 'Mercedes', key: 4, value: 2111, width: 1 },
+        { title: 'Toyota', key: 5, value: 1532, width: 1 },
       ],
     };
   }
@@ -27,17 +31,21 @@ export default class Table extends Component {
   }
 
   startModal() {
-    this.intervalHandle = setInterval(() => this.updateData(), 1000);
+    this.intervalHandle = setInterval(() => this.updateData(), 500);
   }
 
   updateData() {
     const { entries } = this.state;
-    let entriesCopy = JSON.parse(JSON.stringify(entries));
+    const entriesCopy = JSON.parse(JSON.stringify(entries));
     const idx = Math.floor(Math.random() * entries.length);
-    const add = Math.floor(Math.random() * 100);
-    entriesCopy[idx].index += add;
-    console.log(entriesCopy);
-    entriesCopy.sort((a, b) => (a.index > b.index ? 1 : -1));
+    const add = Math.floor(Math.random() * 500);
+    entriesCopy[idx].value += add;
+    entriesCopy.sort((a, b) => (a.value < b.value ? 1 : -1));
+
+    const topValue = entriesCopy[0].value;
+    entriesCopy.forEach(function(entry) {
+      entry.width = getFlexPercentage(entry.value, topValue);
+    });
     this.setState({
       entries: entriesCopy,
     });
@@ -45,13 +53,14 @@ export default class Table extends Component {
 
   render() {
     return (
-      <div>
-        <FlipMove>
+      <div className="bar-table">
+        <FlipMove duration={1000} style={{ width: '100%' }}>
           {this.state.entries.map(entry => (
             <TableRow
-              title={entry.title + ': ' + entry.index}
+              title={entry.title}
               key={entry.key}
-              index={entry.index}
+              value={entry.value}
+              percentage={entry.width}
             />
           ))}
         </FlipMove>
