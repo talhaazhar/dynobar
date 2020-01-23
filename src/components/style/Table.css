@@ -2,7 +2,8 @@
   max-width: 1050px;
   width: 100%;
   height: auto;
-  border-left: 1px solid black;
+  border: 5px solid black;
+  border-style: dashed;
   display: flex;
   flex-direction: row;
   justify-content: center;

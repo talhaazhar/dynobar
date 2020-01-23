@@ -1,5 +1,8 @@
-## Available Scripts
+# React Dynobar
 
+## Example App
+
+![Alt Text](https://media.giphy.com/media/jtX02M8kJspuLKLxkz/giphy.gif)
 In the project directory, you can run:
 
 ### `npm start`

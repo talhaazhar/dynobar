@@ -7,9 +7,9 @@ import { dummyJSON } from './public/constants';
 function App() {
   return (
     <div className="App">
-      <div className="App-header">
-        <TopicForm />
-        <Table id="top-container" data={dummyJSON} />
+      <TopicForm />
+      <div className="App-container">
+        <Table data={dummyJSON} />
       </div>
     </div>
   );
