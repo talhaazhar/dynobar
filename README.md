@@ -9,7 +9,6 @@ React Native component for creating animated and dynamic bar-graph. Currently th
 ## Example app
 
 ![Alt Text](https://media.giphy.com/media/jtX02M8kJspuLKLxkz/giphy.gif)
-In the project directory, you can run:
 
 ## Installation
 
