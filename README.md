@@ -2,7 +2,7 @@
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 
-React Native component for creating animated and dynamic bar-graph. Currently the project is not complete and runs using dummy data. Currently needs refractoring and documentation for prop API.
+React Native component for creating animated and dynamic bar-graph. Currently the project is not complete and runs using dummy data. Needs refractoring and documentation for prop API.
 
 ## Example app
 
